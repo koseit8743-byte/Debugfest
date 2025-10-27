@@ -10,8 +10,8 @@ using namespace std;
 #define STAGE1 true
 #define STAGE2 true
 #define STAGE3 true
-#define STAGE4 false
-#define STAGE5 false
+#define STAGE4 true
+#define STAGE5 true
 
 //If your stage isn't implemented, it should return NOT_IMPLEMENTED
 //If your stage detects bad input from the user, return BAD_INPUT
@@ -81,8 +81,8 @@ int function2() {
 int function3() {
 	cout << "Stevie Nicks was the lead singer for Fleetwood Mac and also had a solo career.\n";
 	cout << "Please enter the name of a song and we will return 1 if it is one of her songs, 0 otherwise.\n";
-	string song;
-	getline (cin, song);
+	string song = read();
+//	getline(cin, song);
 	if (song == "The Chain") {
 		return 1;
 	} else if (song == "Edge of Seventeen") {
@@ -126,7 +126,7 @@ int function4() {
 	string str = readline("Enter the string for a game, such as: FFTTETCFS:\n");
 	int score{};
 	if (str.size() == 0) return score;
-	char last_char = "F";
+	char last_char = 'F';
 	for (const char &c : str) {
 		switch (c) {
 		case FIELD_GOAL:
@@ -136,11 +136,11 @@ int function4() {
 			score += TOUCHDOWN_POINTS;
 			break;
 		case EXTRA_POINT:
-			if (last_char == TOUCHDOWN) return BAD_INPUT;
+			if (last_char != TOUCHDOWN) return BAD_INPUT;
 			score += EXTRA_POINT_POINT;
 			break;
 		case CONVERSION:
-			if (last_char == TOUCHDOWN) return BAD_INPUT;
+			if (last_char != TOUCHDOWN) return BAD_INPUT;
 			score += CONVERSION_POINTS;
 			break;
 		case SAFETY:
