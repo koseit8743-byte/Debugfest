@@ -8,8 +8,8 @@ using namespace std;
 
 //When you complete a stage, set the next stage's 'false' to be 'true'
 #define STAGE1 true
-#define STAGE2 false
-#define STAGE3 false
+#define STAGE2 true
+#define STAGE3 true
 #define STAGE4 false
 #define STAGE5 false
 
@@ -31,14 +31,15 @@ int function1() {
 	int sum = 0;
 	while (true) {
 		int start = read("What is the starting value on the odometer (0 to quit)?\n");
-		if (start <= 0) return BAD_INPUT;
 		if (!start) return sum;
+		if (start <= 0) return BAD_INPUT;
+		//	if (!start) return sum;  logic ERROR - doesnt let the code stop looping lol
 		int end = read("What is the ending value on the odometer (0 to quit)?\n");
 		if (end <= 0) return BAD_INPUT;
 		if (!end) return sum;
 		int distance = end - start;
 		if (distance < 0) return BAD_INPUT;
-		sum -= distance;
+		sum += distance;
 	}
 	return sum;
 }
@@ -57,9 +58,11 @@ int function1() {
 //With seed 67 it should return 69
 int function2() {
 	int seed = read("What seed should we use for the random number generator?\n");
-	int sum{};
+	int sum {};
+	srand(seed);
+
 	for (int i = 0; i < 20; i++) {
-		srand(seed);
+		//		srand(seed);
 		sum += rand() % 6 + 1;
 	}
 	return sum;
@@ -79,15 +82,13 @@ int function3() {
 	cout << "Stevie Nicks was the lead singer for Fleetwood Mac and also had a solo career.\n";
 	cout << "Please enter the name of a song and we will return 1 if it is one of her songs, 0 otherwise.\n";
 	string song;
-	cin >> song;
+	getline (cin, song);
 	if (song == "The Chain") {
 		return 1;
 	} else if (song == "Edge of Seventeen") {
 		return 1;
 
-	} else
-		return 0;
-	else if (song == "Stop Draggin' My Heart Around") {
+	}	else if (song == "Stop Draggin' My Heart Around") {
 		return 1;
 	} else if (song == "Stand Back") {
 		return 1;
@@ -95,8 +96,10 @@ int function3() {
 		return 1;
 	} else if (song == "Go Your Own Way") {
 		return 1;
+	} else {
+		return 0;
 	}
-	return 0;
+
 }
 #else
 int function3() {
